@@ -4,7 +4,109 @@
 
 ## 项目介绍
 
-本项目是一个企业级管理系统的前端部分，采用最新的前端技术栈，提供了完善的用户界面和交互体验。系统包含用户管理、角色管理、菜单管理等基础功能模块，可以快速进行二次开发和功能扩展。
+本项目是一个企业级管理系统的前端部分，采用最新的前端技术栈，提供了完善的用户界面和交互体验。
+#### 模块功能说明
+##### 仪表盘模块
+
+功能：
+
+- 实时展示关键业务指标（用户数、订单量、销售额等）
+- 仓库库存可视化图表
+- 订单物流动态跟踪
+
+![image](./public/images/dashboard/dashboad1.png)
+
+![image](./public/images/dashboard/dashboard2.png)
+
+![image](./public/images/dashboard/dashboard3.png)
+![image](./public/images/dashboard/dashboard4.png)
+### 2.2 商品管理
+
+包含子模块：
+
+- 商品分类管理
+- 商品列表管理
+- 库存管理
+- - 入库管理
+- - 出库管理
+
+主要功能：
+- 商品CRUD操作
+- 库存预警设置
+- 商品导入导出
+
+![image](./public/images/goods/goods1.png)
+![image](./public/images/goods/goods2.png)
+![image](./public/images/goods/goods3.png)
+![image](./public/images/goods/goods4.png)
+![image](./public/images/goods/goods5.png)
+
+### 2.3 订单管理
+
+包含子模块：
+
+- 订单列表
+- 订单处理
+- 退货管理
+主要功能：
+
+- 订单状态跟踪
+- 批量操作（审核/拒绝）
+- 订单详情查看
+
+![image](./public/images/order/order1.png)
+![image](./public/images/order/order2.png)
+![image](./public/images/order/order3.png)
+### 2.4 物流管理
+
+包含子模块：
+
+- 物流商管理
+- 发货管理
+- 物流跟踪
+主要功能：
+
+- 物流单号管理
+- 发货单创建
+- 物流状态查询
+
+![image](./public/images/logistics/logistics1.png)
+![image](./public/images/logistics/logistics2.png)
+![image](./public/images/logistics/logistics3.png)
+![image](./public/images/logistics/logistics4.png)
+### 2.5 报表统计
+
+包含子模块：
+
+- 订单报表
+- 库存报表
+- 运营报表
+主要功能：
+
+- 数据可视化展示
+- 自定义时间范围查询
+- 报表导出打印
+
+![image](./public/images/report/report1.png)
+![image](./public/images/report/report2.png)
+![image](./public/images/report/report3.png)
+![image](./public/images/report/report4.png)
+### 2.6 系统管理
+
+包含子模块：
+
+- 用户管理
+- 菜单管理
+- 个人设置
+主要功能：
+
+- RBAC权限控制
+- 部门树形管理
+- 密码修改
+
+![image](./public/images/system/system1.png)
+![image](./public/images/system/system2.png)
+![image](./public/images/system/system3.png)
 
 ## 技术栈
 
