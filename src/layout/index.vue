@@ -4,6 +4,9 @@
     <div class="main-container">
       <navbar />
       <app-main />
+      <div class="footer-copyright">
+        Copyright © 2025 仓库物流管理系统 | 作者：bennywen | All Rights Reserved
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +42,19 @@ import AppMain from './components/AppMain.vue';
     margin-left: 210px;
     position: relative;
     width: calc(100% - 210px);
+  }
+  
+  .footer-copyright {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 210px;
+    padding: 10px 20px;
+    text-align: center;
+    color: #888;
+    font-size: 12px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #ebeef5;
   }
 }
 </style>

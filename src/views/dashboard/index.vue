@@ -116,58 +116,6 @@
       </el-col>
     </el-row>
 
-    <!-- 待处理任务与提醒 -->
-    <el-row :gutter="20" class="mt-20">
-      <el-col :span="12">
-        <el-card>
-          <template #header>
-            <div class="card-header">
-              <span>待处理任务</span>
-              <el-button type="text" @click="navigateTo('/order/process')">查看全部</el-button>
-            </div>
-          </template>
-          <el-table :data="pendingTasks" style="width: 100%">
-            <el-table-column prop="type" label="任务类型" width="120" />
-            <el-table-column prop="count" label="数量" width="80" />
-            <el-table-column prop="priority" label="优先级" width="100">
-              <template #default="scope">
-                <el-tag :type="scope.row.priority === '高' ? 'danger' : 'warning'">
-                  {{ scope.row.priority }}
-                </el-tag>
-              </template>
-            </el-table-column>
-            <el-table-column label="操作">
-              <template #default="scope">
-                <el-button size="small" @click="handleTask(scope.row)">处理</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-        </el-card>
-      </el-col>
-
-      <!-- 报表与分析快捷入口 -->
-      <el-col :span="12">
-        <el-card>
-          <template #header>
-            <div class="card-header">
-              <span>报表与分析</span>
-            </div>
-          </template>
-          <div class="shortcut-list">
-            <div 
-              class="shortcut-item" 
-              v-for="(report, index) in reportShortcuts" 
-              :key="index" 
-              @click="navigateTo(report.path)"
-            >
-              <el-icon class="icon"><component :is="report.icon" /></el-icon>
-              <span class="label">{{ report.title }}</span>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
-
     <!-- 仓库布局可视化 -->
     <el-row :gutter="20" class="mt-20">
       <el-col :span="24">
@@ -234,12 +182,6 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import * as echarts from 'echarts'
-import { 
-  User, Box, ShoppingCart, Money, 
-  Refresh, QuestionFilled, Document, 
-  DataAnalysis, List, PieChart 
-} from '@element-plus/icons-vue'
-
 const router = useRouter()
 const userStore = useUserStore()
 
@@ -346,19 +288,146 @@ const initCharts = () => {
   // 仓库库存图表
   const warehouseChartInstance = echarts.init(warehouseChart.value)
   warehouseChartInstance.setOption({
-    // 仓库库存图表配置
+    title: {
+      text: '仓库库存分布',
+      left: 'center'
+    },
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      orient: 'vertical',
+      left: 'left'
+    },
+    series: [
+      {
+        name: '库存量',
+        type: 'pie',
+        radius: '50%',
+        data: [
+          { value: 1048, name: '上海总仓' },
+          { value: 735, name: '北京分仓' },
+          { value: 580, name: '广州分仓' },
+          { value: 484, name: '成都分仓' },
+          { value: 300, name: '武汉分仓' }
+        ],
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
   })
 
   // 业务指标图表
   const businessChartInstance = echarts.init(businessChart.value)
   businessChartInstance.setOption({
-    // 业务指标图表配置
+    title: {
+      text: '业务指标趋势',
+      left: 'center'
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    legend: {
+      data: ['销售额', '订单量', '用户数'],
+      bottom: 10
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '15%',
+      containLabel: true
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        name: '销售额',
+        type: 'line',
+        data: [120, 132, 101, 134, 90, 230, 210]
+      },
+      {
+        name: '订单量',
+        type: 'line',
+        data: [220, 182, 191, 234, 290, 330, 310]
+      },
+      {
+        name: '用户数',
+        type: 'line',
+        data: [150, 232, 201, 154, 190, 330, 410]
+      }
+    ]
   })
 
   // 仓库布局可视化
   const warehouseMapInstance = echarts.init(warehouseMap.value)
   warehouseMapInstance.setOption({
-    // 仓库布局配置
+    title: {
+      text: '仓库布局热力图',
+      left: 'center'
+    },
+    tooltip: {
+      position: 'top'
+    },
+    grid: {
+      height: '80%',
+      top: '10%'
+    },
+    xAxis: {
+      type: 'category',
+      data: ['A区', 'B区', 'C区', 'D区', 'E区'],
+      splitArea: {
+        show: true
+      }
+    },
+    yAxis: {
+      type: 'category',
+      data: ['1层', '2层', '3层', '4层'],
+      splitArea: {
+        show: true
+      }
+    },
+    visualMap: {
+      min: 0,
+      max: 100,
+      calculable: true,
+      orient: 'horizontal',
+      left: 'center',
+      bottom: '0%',
+      inRange: {
+        color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+      }
+    },
+    series: [{
+      name: '库存密度',
+      type: 'heatmap',
+      data: [
+        [0, 0, 76], [0, 1, 45], [0, 2, 32], [0, 3, 19],
+        [1, 0, 89], [1, 1, 67], [1, 2, 54], [1, 3, 23],
+        [2, 0, 34], [2, 1, 56], [2, 2, 78], [2, 3, 65],
+        [3, 0, 12], [3, 1, 23], [3, 2, 45], [3, 3, 67],
+        [4, 0, 98], [4, 1, 76], [4, 2, 54], [4, 3, 32]
+      ],
+      label: {
+        show: true
+      },
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }]
   })
 }
 
