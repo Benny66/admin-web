@@ -29,6 +29,18 @@ const systemRoutes: RouteRecordRaw = {
       component: () => import('@/views/system/menu/index.vue'),
       meta: { title: '菜单管理', icon: 'Menu' },
     },
+    // {
+    //   path: 'dict',
+    //   name: 'Dict',
+    //   component: () => import('@/views/system/dict/index.vue'),
+    //   meta: { title: '字典管理', icon: 'Document' },
+    // },
+    // {
+    //   path: 'log',
+    //   name: 'Log',
+    //   component: () => import('@/views/system/log/index.vue'),
+    //   meta: { title: '操作日志', icon: 'DocumentCopy' },
+    // },
   ],
 };
 

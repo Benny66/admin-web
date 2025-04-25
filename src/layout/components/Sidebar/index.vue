@@ -39,7 +39,7 @@ const sidebarStore = useSidebarStore();
 const route = useRoute();
 
 const logo = ref('/src/assets/img/logo.svg');
-const title = ref('Admin System');
+const title = ref('仓库物流管理系统');
 
 const isCollapse = computed(() => sidebarStore.isCollapse);
 const routes = computed(() => constantRoutes.filter(route => !route.meta?.hidden));
