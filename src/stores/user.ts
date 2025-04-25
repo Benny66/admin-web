@@ -28,7 +28,14 @@ export const useUserStore = defineStore('user', {
     // 登录
     async login(username: string, password: string) {
       try {
-        const { data } = await login(username, password);
+        // const { data } = await login(username, password);
+        const data = {
+          token: 'fake-token',
+          name: 'John Doe',
+          avatar: '/src/assets/img/avatar.svg',
+          roles: ['admin'],
+          permissions: ['view_dashboard', 'edit_settings'],
+        };
         this.token = data.token;
         setToken(data.token);
         return data;
@@ -55,7 +62,7 @@ export const useUserStore = defineStore('user', {
     // 退出登录
     async logout() {
       try {
-        await logout();
+        // await logout();
         this.resetState();
         removeToken();
         return true;

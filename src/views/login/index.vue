@@ -2,18 +2,16 @@
   <div class="login-container">
     <div class="login-box">
       <div class="login-logo">
-        <img src="@/assets/logo.png" alt="Logo" />
+        <img src="@/assets/img/logo.svg" alt="Logo" />
         <h1 class="title">管理系统</h1>
       </div>
       
       <div class="login-form">
-        <div class="login-type">
-          <span class="active">账号密码登录</span>
-          <span class="divider">|</span>
-          <span>扫码登录</span>
+        <div class="login-title">
+          <h2>账号密码登录</h2>
         </div>
         
-        <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="form">
+        <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" class="form">
           <el-form-item prop="username">
             <label>账户</label>
             <el-input
@@ -51,12 +49,9 @@
           <a href="javascript:;" class="forgot-password">忘记密码？</a>
         </div>
         
-        <div class="login-methods">
-          <p>支持两种登录方式：</p>
-          <ol>
-            <li>扫码登录：使用微信或企业微信扫描二维码</li>
-            <li>Pin+Token登录：关注企业微信公众号，在企业号的"统一登录"界面设置Pin码后方可使用</li>
-          </ol>
+        <div class="login-tips">
+          <p>默认账号：admin</p>
+          <p>默认密码：123456</p>
         </div>
       </div>
     </div>
@@ -73,8 +68,8 @@ const router = useRouter();
 const userStore = useUserStore();
 
 const loginForm = reactive({
-  username: '',
-  password: ''
+  username: 'admin',
+  password: '123456'
 });
 
 const loginRules = {
@@ -90,9 +85,14 @@ const handleLogin = async () => {
     loading.value = true;
     await loginFormRef.value.validate();
     
-    await userStore.login(loginForm.username, loginForm.password);
-    router.push({ path: '/' });
-    ElMessage.success('登录成功');
+    // 验证账号密码是否为admin/123456
+    if (loginForm.username === 'admin' && loginForm.password === '123456') {
+      await userStore.login(loginForm.username, loginForm.password);
+      router.push({ path: '/' });
+      ElMessage.success('登录成功');
+    } else {
+      ElMessage.error('账号或密码错误，请使用默认账号密码');
+    }
   } catch (error) {
     console.error('登录失败:', error);
     ElMessage.error('登录失败，请检查用户名和密码');
@@ -135,24 +135,14 @@ const handleLogin = async () => {
       }
     }
     
-    .login-type {
-      display: flex;
+    .login-title {
       margin-bottom: 20px;
+      text-align: center;
       
-      span {
-        cursor: pointer;
-        padding: 0 10px;
-        color: #666;
-        
-        &.active {
-          color: #1890ff;
-          font-weight: bold;
-        }
-        
-        &.divider {
-          cursor: default;
-          color: #ddd;
-        }
+      h2 {
+        font-size: 18px;
+        color: #333;
+        margin: 0;
       }
     }
     
@@ -197,23 +187,15 @@ const handleLogin = async () => {
       }
     }
     
-    .login-methods {
+    .login-tips {
       border-top: 1px solid #eee;
       padding-top: 15px;
-      font-size: 13px;
+      font-size: 14px;
       color: #666;
       
       p {
-        margin-bottom: 5px;
-      }
-      
-      ol {
-        margin: 0;
-        padding-left: 20px;
-        
-        li {
-          margin-bottom: 5px;
-        }
+        margin: 5px 0;
+        text-align: center;
       }
     }
   }
