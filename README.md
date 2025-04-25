@@ -27,7 +27,7 @@
 - 个人中心和账户设置
 
 ## 项目结构
-
+```
 admin-web/
 ├── public/              # 静态资源
 ├── src/                 # 源代码
@@ -47,7 +47,7 @@ admin-web/
 ├── package.json         # 项目依赖
 ├── tsconfig.json        # TypeScript 配置
 └── vite.config.ts       # Vite 配置
-
+```
 
 ## 快速开始
 
@@ -75,7 +75,8 @@ npm run build
 ```bash
 npm run preview
  ```
- ## 登录信息
+
+## 登录信息
 - 默认用户名：admin
 - 默认密码：123456
 ## 开发指南
@@ -89,22 +90,6 @@ npm run preview
 3. 在页面组件中引入并使用
 ### 权限控制
 系统采用基于角色的权限控制，可以在角色管理中为不同角色分配不同的菜单权限。
-
-## 浏览器支持
-- Chrome (最新版)
-- Firefox (最新版)
-- Safari (最新版)
-- Edge (最新版)
-## 贡献指南
-1. Fork 本仓库
-2. 创建您的特性分支 git checkout -b feature/amazing-feature
-3. 提交您的更改 git commit -m 'Add some amazing feature'
-4. 推送到分支 git push origin feature/amazing-feature
-5. 提交 Pull Request
-## 许可证
-MIT
-
-这个README文件包含了项目的基本介绍、技术栈、功能特性、项目结构、快速开始指南、开发指南以及浏览器支持等信息，为开发者提供了全面的项目说明。
 
 ## Docker部署
 
@@ -167,5 +152,20 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
     }
 }
- ```
+
 ```
+
+
+## 浏览器支持
+- Chrome (最新版)
+- Firefox (最新版)
+- Safari (最新版)
+- Edge (最新版)
+## 贡献指南
+1. Fork 本仓库
+2. 创建您的特性分支 git checkout -b feature/amazing-feature
+3. 提交您的更改 git commit -m 'Add some amazing feature'
+4. 推送到分支 git push origin feature/amazing-feature
+5. 提交 Pull Request
+## 许可证
+这个README文件包含了项目的基本介绍、技术栈、功能特性、项目结构、快速开始指南、开发指南以及浏览器支持等信息，为开发者提供了全面的项目说明。
