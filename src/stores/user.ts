@@ -13,7 +13,7 @@ interface UserState {
 export const useUserStore = defineStore('user', {
   state: (): UserState => ({
     token: getToken() || '',
-    name: '',
+    name: 'bennywen',
     avatar: '/src/assets/img/avatar.svg', // 设置默认头像为本地图片
     roles: [],
     permissions: [],

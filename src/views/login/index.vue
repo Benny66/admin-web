@@ -109,7 +109,9 @@ const handleLogin = async () => {
   align-items: center;
   height: 100vh;
   background-color: #f0f2f5;
-  
+  background-image: url('@/assets/img/background.webp');
+  background-size: cover;
+  background-position: center;
   .login-box {
     width: 400px;
     padding: 30px;
