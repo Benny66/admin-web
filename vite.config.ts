@@ -1,7 +1,12 @@
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
-
+const outputDirConfig = {
+  production: 'dist',
+  development: 'dev_dist',
+  test: 'test_dist',
+  uat: 'uat_dist',
+};
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
@@ -25,7 +30,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: {
-      outDir: 'dist',
+      outDir: outputDirConfig[mode],
       assetsDir: 'assets',
       sourcemap: mode !== 'production',
       terserOptions: {

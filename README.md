@@ -106,4 +106,66 @@ MIT
 
 这个README文件包含了项目的基本介绍、技术栈、功能特性、项目结构、快速开始指南、开发指南以及浏览器支持等信息，为开发者提供了全面的项目说明。
 
+## Docker部署
 
+本项目提供了Docker部署方案，可以通过以下步骤进行构建和运行：
+
+### 构建Docker镜像
+
+```bash
+docker build -t admin-web:latest .
+```
+
+
+### 运行生产环境版本
+docker run -d -p 80:80 -v /path/to/nginx.conf:/etc/nginx/conf.d/default.conf admin-web:latest
+
+### 运行测试环境版本
+docker run -d -p 8080:80 -v /path/to/test-nginx.conf:/etc/nginx/conf.d/default.conf admin-web:latest
+
+### Nginx配置示例
+生产环境配置示例( nginx.conf ):
+
+```nginx
+server {
+    listen 80;
+    server_name localhost;
+
+    location / {
+        root /app/dist;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
+
+    # API代理配置
+    location /api/ {
+        proxy_pass http://backend-api-server/api/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+ ```
+
+
+测试环境配置示例( test-nginx.conf ):
+
+```nginx
+server {
+    listen 80;
+    server_name localhost;
+
+    location / {
+        root /app/test_dist;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
+
+    # API代理配置
+    location /api/ {
+        proxy_pass http://test-backend-api-server/api/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+ ```
+```
